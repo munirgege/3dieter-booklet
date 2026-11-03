@@ -1,0 +1,1618 @@
+// /3dieter — custom 3D-printed photo booklet. Mobile first.
+
+$primary: #cc0000;
+$primary-dark: #a30000;
+$ink: #1a1a1a;
+$muted: #6b6f76;
+$line: #eceef2;
+$surface: #f6f6f4;
+$radius: 16px;
+
+@mixin desktop {
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 576px) {
+    @content;
+  }
+}
+
+.page {
+  background: $surface;
+  color: $ink;
+  padding-bottom: 96px;
+
+  @include desktop {
+    padding-bottom: 64px;
+  }
+}
+
+.anchor {
+  scroll-margin-top: 16px;
+}
+
+// ---------------------------------------------------------------------------
+// Hero
+// ---------------------------------------------------------------------------
+
+.hero {
+  background: linear-gradient(180deg, #fff 0%, $surface 100%);
+  padding: 28px 16px 8px;
+
+  @include desktop {
+    padding: 56px 24px 24px;
+  }
+}
+
+.heroInner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @include desktop {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.heroText {
+  flex: 1 1 50%;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $primary;
+  background: rgba($primary, 0.08);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 12px;
+}
+
+.heroTitle {
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 800;
+  margin: 0 0 12px;
+
+  @include desktop {
+    font-size: 44px;
+  }
+}
+
+.heroLead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: $muted;
+  margin: 0 0 16px;
+
+  @include desktop {
+    font-size: 17px;
+  }
+}
+
+.heroPoints {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+
+  i {
+    color: $primary;
+    width: 22px;
+  }
+}
+
+.heroPrice {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: $muted;
+  }
+}
+
+.heroImages {
+  flex: 1 1 50%;
+  display: grid;
+  // portrait 3:4 next to landscape 4:3 at the same height: widths 9 : 16
+  grid-template-columns: 9fr 16fr;
+  gap: 12px;
+  align-items: start;
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: $radius;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  img:first-child {
+    aspect-ratio: 1045 / 1400;
+  }
+
+  img:last-child {
+    aspect-ratio: 1600 / 1194;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+
+.builderGrid {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include desktop {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 24px;
+  }
+}
+
+.previewColumn {
+  @include desktop {
+    flex: 0 0 380px;
+    align-self: stretch;
+  }
+}
+
+.previewSticky {
+  @include desktop {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+.stepsColumn {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid $line;
+  border-radius: $radius;
+  padding: 16px;
+
+  @include tablet {
+    padding: 24px;
+  }
+}
+
+.previewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.previewLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $muted;
+}
+
+.stepHeader {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.stepNumber {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $ink;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 2px 0 0;
+}
+
+.cardSubtitle {
+  font-size: 13px;
+  color: $muted;
+  margin: 4px 0 0;
+}
+
+.helpText {
+  font-size: 12px;
+  line-height: 1.5;
+  color: $muted;
+  margin: 12px 0 0;
+}
+
+.helpTextCenter {
+  @extend .helpText;
+  text-align: center;
+
+  a {
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+.fieldError {
+  display: block;
+  font-size: 12px;
+  color: $primary;
+  margin-top: 6px;
+}
+
+.processing {
+  margin-top: 12px;
+  font-size: 13px;
+  color: $muted;
+}
+
+// ---------------------------------------------------------------------------
+// Buttons
+// ---------------------------------------------------------------------------
+
+.primaryButton,
+.secondaryButton,
+.primaryButtonSmall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.primaryButton,
+.primaryButtonSmall {
+  background: $primary;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: $primary-dark;
+  }
+}
+
+.primaryButtonSmall {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+.secondaryButton {
+  background: #fff;
+  color: $ink;
+  border-color: #d6d8dd;
+
+  &:hover:not(:disabled) {
+    border-color: $ink;
+  }
+}
+
+.blockButton {
+  width: 100%;
+}
+
+.buttonBusy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconButton,
+.iconButtonOutline {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #f1f1f1;
+  color: $ink;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.iconButtonOutline {
+  border-radius: 12px;
+  height: 48px;
+  flex-basis: 48px;
+  width: 48px;
+  background: #fff;
+  border: 1.5px solid #d6d8dd;
+}
+
+.backLink {
+  border: none;
+  background: none;
+  padding: 4px 0;
+  font-weight: 600;
+  color: $ink;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.linkButton {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 16px;
+  font-weight: 600;
+  color: $primary;
+}
+
+// ---------------------------------------------------------------------------
+// Design controls
+// ---------------------------------------------------------------------------
+
+.fieldStack {
+  display: grid;
+  gap: 12px;
+
+  @include tablet {
+    grid-template-columns: 1fr 1fr;
+
+    .helpText {
+      grid-column: 1 / -1;
+      margin-top: 0;
+    }
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.fieldLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.counter {
+  font-weight: 500;
+  color: $muted;
+  font-variant-numeric: tabular-nums;
+}
+
+.counterFull {
+  color: $primary;
+}
+
+.input {
+  width: 100%;
+  // 16px keeps iOS Safari from zooming into the field.
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1.5px solid #d6d8dd;
+  border-radius: 12px;
+  background: #fff;
+  color: $ink;
+  outline: none;
+  resize: vertical;
+
+  &:focus {
+    border-color: $ink;
+  }
+
+  &:disabled {
+    background: #f6f6f6;
+  }
+}
+
+.inputError {
+  border-color: $primary;
+}
+
+.optionActive {
+  border-color: $ink !important;
+  box-shadow: inset 0 0 0 1px $ink;
+}
+
+.fontGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.fontOption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-height: 72px;
+  padding: 10px 12px;
+  border: 1.5px solid $line;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.fontSample {
+  font-family: var(--sample-font) !important;
+  font-size: 20px;
+  line-height: 1.2;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fontName {
+  font-size: 12px;
+  color: $muted;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  min-width: 52px;
+}
+
+.swatchColor {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 0 3px #fff, 0 0 0 4px transparent;
+  transition: box-shadow 0.15s;
+}
+
+.swatchActive .swatchColor {
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px $ink;
+}
+
+.swatchDisabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+
+  .swatchColor {
+    background-image: linear-gradient(
+      135deg,
+      transparent 46%,
+      #6b6f76 46%,
+      #6b6f76 54%,
+      transparent 54%
+    ) !important;
+  }
+}
+
+.swatchLabel {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.swatchSection + .swatchSection {
+  margin-top: 18px;
+}
+
+.viewerColorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  > span {
+    flex: 0 0 44px;
+    font-size: 12px;
+    font-weight: 600;
+    color: $muted;
+  }
+}
+
+.swatchName {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.swatchesCompact {
+  gap: 8px;
+
+  .swatch {
+    min-width: 0;
+  }
+
+  .swatchColor {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+.finishGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.finishOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1.5px solid $line;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.finishSample {
+  flex: 0 0 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #9e1b1f;
+}
+
+.finish_matte {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.07) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+.finish_glossy {
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.18) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.finishName {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.finishDescription {
+  display: block;
+  font-size: 12px;
+  color: $muted;
+  line-height: 1.35;
+}
+
+.finishCompact {
+  grid-template-columns: auto auto;
+
+  .finishOption {
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .finishSample {
+    flex-basis: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 2D cover mockup (front view in the stand, mm: 116 wide × 100 tall)
+// ---------------------------------------------------------------------------
+
+.mockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 116 / 100;
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.16));
+}
+
+.mockBack {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4%;
+  height: 89%;
+  border-radius: 0 6px 4px 4px;
+  filter: brightness(0.82);
+}
+
+.mockTab {
+  position: absolute;
+  left: 0;
+  width: 45%;
+  bottom: 100%;
+  height: 7.865%;
+  border-radius: 6px 0 0 0;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 0 100%);
+}
+
+.mockFront {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4%;
+  height: 84%;
+  border-radius: 6px 6px 4px 4px;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+}
+
+// Spine hinge knuckles sitting in the notches on the cover's bottom edge.
+.mockKnuckle {
+  position: absolute;
+  bottom: 0;
+  height: 3.810%;
+  border-top: 1px solid rgba(0, 0, 0, 0.35);
+  border-left: 1px solid rgba(0, 0, 0, 0.35);
+  border-right: 1px solid rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.mockMatte::after {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.045) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+.mockGlossy::after {
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.28) 42%,
+    rgba(255, 255, 255, 0) 55%
+  );
+}
+
+.mockCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Front wall of the U-shaped stand: 72 mm of the 116 mm length, 24 mm tall.
+.mockStand {
+  position: absolute;
+  left: 18.966%;
+  right: 18.966%;
+  bottom: 0;
+  height: 24%;
+  background: linear-gradient(180deg, #2b2b2d, #161617);
+  border-radius: 5px 5px 3px 3px;
+}
+
+// ---------------------------------------------------------------------------
+// Photo slots
+// ---------------------------------------------------------------------------
+
+.photoToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.progressWrap {
+  flex: 1 1 auto;
+}
+
+.progressLabel {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.progressBar {
+  height: 6px;
+  border-radius: 999px;
+  background: $line;
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $primary;
+    transition: width 0.25s;
+  }
+}
+
+// Loading state laid over the photo grid (processing uploads, applying a filter).
+.slotsArea {
+  position: relative;
+}
+
+.slotsBusy {
+  position: absolute;
+  inset: -4px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 64px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(1.5px);
+}
+
+// Sticky, so it stays on screen while any part of a tall grid is visible.
+.slotsBusyPill {
+  position: sticky;
+  top: 45vh;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: $ink;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.slotGroup + .slotGroup {
+  margin-top: 16px;
+}
+
+.slotGroupLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: $muted;
+  margin-bottom: 8px;
+}
+
+.slotGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  @include tablet {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.slotWrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+}
+
+.slotEmpty {
+  width: 100%;
+  height: 100%;
+  border: 1.5px dashed #c9ccd2;
+  border-radius: 10px;
+  background: #fafafa;
+  color: $muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  cursor: pointer;
+
+  i {
+    font-size: 16px;
+  }
+
+  &:hover {
+    border-color: $ink;
+    color: $ink;
+  }
+}
+
+.slotFilled {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-touch-callout: none;
+  background: #eee;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+}
+
+.slotDragging .slotFilled {
+  cursor: grabbing;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  transform: scale(1.04);
+}
+
+.slotNumber {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 11px;
+  padding: 0 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dpiBadge {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.dpi_sharp {
+  background: #15803d;
+}
+
+.dpi_ok {
+  background: #b45309;
+}
+
+.dpi_low {
+  background: $primary;
+}
+
+.slotRemove {
+  position: absolute;
+  right: -6px;
+  top: -6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: $ink;
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+// ---------------------------------------------------------------------------
+// Order bar
+// ---------------------------------------------------------------------------
+
+.orderCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.orderPrice {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.orderActions {
+  display: flex;
+  gap: 10px;
+}
+
+.mobileBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1px solid $line;
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.06);
+
+  > div {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .primaryButton {
+    padding: 0 20px;
+  }
+}
+
+.mobileBarPreview {
+  padding: 0 12px;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.mobileBarPrice {
+  font-weight: 800;
+  font-size: 17px;
+}
+
+.mobileBarMeta {
+  font-size: 12px;
+  color: $muted;
+}
+
+// ---------------------------------------------------------------------------
+// Overlays shared by the crop dialog and the 3D viewer
+// ---------------------------------------------------------------------------
+
+.viewerTitle {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.viewerSubtitle {
+  font-size: 12px;
+  color: $muted;
+}
+
+.cropOverlay,
+.viewerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1060;
+}
+
+.cropOverlay {
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+
+  @include tablet {
+    align-items: center;
+    padding: 24px;
+  }
+}
+
+.cropDialog {
+  width: 100%;
+  max-width: 560px;
+  height: 100%;
+  height: 100dvh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+
+  @include tablet {
+    height: min(760px, calc(100dvh - 48px));
+    border-radius: $radius;
+    overflow: hidden;
+  }
+}
+
+.cropHeader,
+.viewerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  padding-top: calc(12px + env(safe-area-inset-top));
+  background: #fff;
+}
+
+.cropArea {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #111;
+}
+
+.cropControls {
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.zoomRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: $muted;
+
+  input {
+    flex: 1 1 auto;
+    accent-color: $primary;
+    height: 32px;
+  }
+}
+
+.dpiLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dpiDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dpiText_sharp {
+  color: #15803d;
+}
+
+.dpiText_ok {
+  color: #b45309;
+}
+
+.dpiText_low {
+  color: $primary;
+}
+
+.cropActions,
+.viewerActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+// 3D viewer: a dialog at 95% of the viewport, floating over the dimmed page.
+
+.viewerOverlay {
+  background: rgba(17, 17, 17, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewerDialog {
+  width: 95vw;
+  height: 95vh;
+  height: 95dvh;
+  background: #fff;
+  border-radius: $radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+}
+
+// Phones: iOS Safari's floating address bar sits over the bottom of a
+// dvh-sized box, so size against the small viewport (bars shown) and keep
+// clear of the home indicator. The panel is tightened so the canvas keeps
+// most of the height.
+@media (max-width: 767px) {
+  .viewerOverlay {
+    align-items: flex-start;
+    padding-top: calc(10px + env(safe-area-inset-top));
+  }
+
+  .viewerDialog {
+    width: calc(100vw - 20px);
+    height: calc(100svh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height: 760px;
+  }
+
+  .viewerDialog .viewerHeader {
+    padding: 10px 14px;
+  }
+
+  .viewerDialog .viewTabs {
+    top: 8px;
+  }
+
+  .viewerDialog .viewTab {
+    padding: 6px 12px;
+  }
+
+  .viewerDialog .viewerHint {
+    bottom: 6px;
+    font-size: 11px;
+  }
+
+  .viewerDialog .viewerPanel {
+    padding: 10px 14px 12px;
+    gap: 8px;
+  }
+
+  .viewerDialog .viewerPanelHint {
+    font-size: 12px;
+  }
+
+  .viewerDialog .viewerPanelRow {
+    gap: 8px;
+  }
+
+  .viewerDialog .swatchesCompact .swatchColor {
+    width: 28px;
+    height: 28px;
+  }
+
+  .viewerDialog .viewerColorRow > span {
+    flex-basis: 40px;
+  }
+
+  .viewerDialog .primaryButton,
+  .viewerDialog .secondaryButton {
+    min-height: 44px;
+  }
+}
+
+.viewerStage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, #ecebe7 75%);
+}
+
+.sceneLoading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: $muted;
+}
+
+.viewTabs {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.viewTab {
+  border: none;
+  background: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $muted;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.viewTabActive {
+  background: $ink;
+  color: #fff;
+}
+
+.viewerHint {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: $muted;
+  pointer-events: none;
+}
+
+.viewerPanel {
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid $line;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include desktop {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 8px;
+    padding: 12px 24px 16px;
+  }
+}
+
+.viewerPanelHint {
+  font-size: 13px;
+  color: $muted;
+  margin: 0;
+
+  @include desktop {
+    flex: 1 1 100%;
+  }
+}
+
+.viewerPanelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+
+  // Divider between the cover colour, text colour and finish groups:
+  // vertical when they sit in one row, horizontal once they stack on phones.
+  > * + * {
+    border-left: 1px solid $line;
+    padding-left: 16px;
+  }
+
+  @media (max-width: 767px) {
+    > * {
+      flex: 1 1 100%;
+    }
+
+    > * + * {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid $line;
+      padding-top: 8px;
+    }
+  }
+}
+
+.viewerActions {
+  @include desktop {
+    display: flex;
+    margin-left: auto;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Checkout
+// ---------------------------------------------------------------------------
+
+.checkoutWrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 16px;
+
+  @include desktop {
+    padding: 24px;
+  }
+}
+
+.checkoutGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include desktop {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+.checkoutMain {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkoutSide {
+  @include desktop {
+    flex: 0 0 380px;
+    position: sticky;
+    top: 24px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+
+  .field {
+    grid-column: 1 / -1;
+  }
+
+  .fieldHalf {
+    grid-column: auto;
+  }
+}
+
+.fieldHalf {
+  min-width: 0;
+}
+
+.summaryPreview {
+  max-width: 240px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.summaryThumbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
+
+.summaryBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px dashed $line;
+  margin-top: 4px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+
+  span:first-child {
+    color: $muted;
+  }
+
+  span:last-child {
+    text-align: right;
+  }
+}
+
+.summaryRowBold {
+  font-size: 16px;
+  font-weight: 800;
+
+  span:first-child {
+    color: $ink;
+  }
+}
+
+.alertInfo,
+.alertError,
+.alertWarning {
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.alertInfo {
+  background: #fff2df;
+  margin-top: 12px;
+}
+
+.alertError {
+  background: #fdecec;
+  color: $primary-dark;
+}
+
+.alertWarning {
+  background: #fff7e0;
+  color: #8a5300;
+}
+
+.doneWrap {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .summaryBox {
+    text-align: left;
+  }
+}
+
+.doneIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  background: #15803d;
+
+  &[data-status='pending'] {
+    background: #b45309;
+  }
+}
+
+.doneTitle {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.doneText {
+  font-size: 14px;
+  line-height: 1.6;
+  color: $muted;
+  margin: 0;
+}
+
+.vaBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.startOver {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+// ---------------------------------------------------------------------------
+// Photo filter picker
+// ---------------------------------------------------------------------------
+
+.filterSection {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid $line;
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+
+  @include tablet {
+    gap: 12px;
+  }
+}
+
+.filterOption {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.filterThumb {
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 10px;
+  overflow: hidden;
+  background: $line;
+  box-shadow: 0 0 0 1.5px transparent;
+  transition: box-shadow 0.15s;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.filterActive .filterThumb {
+  box-shadow: 0 0 0 2.5px $ink;
+}
+
+.filterName {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  color: $muted;
+}
+
+.filterActive .filterName {
+  color: $ink;
+}

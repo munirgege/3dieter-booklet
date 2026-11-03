@@ -1,0 +1,31 @@
+{
+  "name": "3dieter-booklet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Customizer for the GetGoing × 3Dieter 3D-printed photo booklet, with a live 3D preview",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "next": "^15.3.8",
+    "react": "^19.1.2",
+    "react-dom": "^19.1.2",
+    "react-easy-crop": "^5.5.7",
+    "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "sass": "^1.92.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
